@@ -1,0 +1,1 @@
+flutter pub add smooth_page_indicator
