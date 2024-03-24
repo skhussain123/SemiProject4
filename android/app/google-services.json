@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943650333062",
+    "project_id": "cityguide-65ef7",
+    "storage_bucket": "cityguide-65ef7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943650333062:android:b9fb9e5eca569a465f0c07",
+        "android_client_info": {
+          "package_name": "com.example.tourism_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofhY470n2x3TfB_9GmSieZmmMDsASEeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

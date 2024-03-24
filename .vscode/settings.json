@@ -1,0 +1,6 @@
+{
+    "emulator.androidColdBoot": false,
+    "emulator.emulatorPath": "C:\\Users\\sheikh hussain\\AppData\\Local\\Android\\Sdk\\emulator",
+    "emulator.emulatorPathWindows": "C:\\Users\\sheikh hussain\\AppData\\Local\\Android\\Sdk\\emulator",
+    "emulator.emulatorPathLinux": "C:\\Users\\sheikh hussain\\AppData\\Local\\Android\\Sdk\\emulator"
+}
