@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
+import 'package:tourism_app/pages/Auth/login.dart';
+import 'package:tourism_app/utils/app_utils.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -8,17 +10,17 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
+     
       appBar: AppBar(
         
         backgroundColor:AppColor.PrimaryColor,
-        title: Center(
-          child: Text(
-            'Register Account',
-            style: TextStyle(
-              fontFamily: AppFonts.primaryFont,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+        title: Text(
+          'Register Account',
+          style: TextStyle(
+            fontFamily: AppFonts.primaryFont,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -34,7 +36,7 @@ class RegisterPage extends StatelessWidget {
             SizedBox(height: 70),
             
             
-            //Aoo Center logo
+            //APP Center logo
             Image.asset(
               'assets/images/appLogo.png', // Replace this with your app logo asset path
               width: 100,
@@ -62,7 +64,7 @@ class RegisterPage extends StatelessWidget {
             
             
             
-            SizedBox(height: 60),
+            SizedBox(height: 70),
             SizedBox(
               height: 50,
               child: TextFormField(
@@ -72,7 +74,8 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+
+            SizedBox(height: 25),
             SizedBox(
               height: 50,
               child: TextFormField(
@@ -82,7 +85,9 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+
+
+            SizedBox(height: 25),
             SizedBox(
               height: 50,
               child: TextFormField(
@@ -94,7 +99,16 @@ class RegisterPage extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: 20),
+
+           TextButton(onPressed: (){
+            gotoPage(LoginPage(), context);
+           }, 
+           
+           child:  Text("are you already registered?",style: TextStyle(color: Colors.red),),),
+           
+
+
+            SizedBox(height: 25),
             SizedBox(
               height: 50,
               child: ElevatedButton(
@@ -107,12 +121,17 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+
                 child: Text(
-                  'Registration',
+                  'Submit',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
+
+
+
           ],
         ),
       ),

@@ -4,7 +4,7 @@ import 'package:tourism_app/Onboarding/onboarding_items.dart';
 import 'package:tourism_app/constants/color.dart';
 import 'package:tourism_app/pages/Auth/login.dart';
 import 'package:tourism_app/pages/Auth/register.dart';
-import 'package:tourism_app/pages/welcome.dart';
+import 'package:tourism_app/pages/home.dart';
 import 'package:tourism_app/utils/app_utils.dart';
 
 class Onboardingview extends StatefulWidget {

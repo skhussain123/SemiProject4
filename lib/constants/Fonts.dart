@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppFonts {
-  static String primaryFont = 'Tauri';
+  static String primaryFont = 'Poppins';
   static String secondaryFont = 'Kanit';
 }

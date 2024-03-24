@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tourism_app/Onboarding/onboardView.dart';
 import 'package:tourism_app/pages/Auth/login.dart';
 import 'package:tourism_app/pages/Auth/register.dart';
-import 'package:tourism_app/pages/Splash.dart';
-import 'package:tourism_app/pages/welcome.dart';
+import 'package:tourism_app/pages/home.dart';
 
 void main() {
   runApp(const MainFile());
@@ -23,7 +22,7 @@ class MainFile extends StatelessWidget {
       routes: {
         "/": (context) => Onboardingview(),
         //  "/": (context) => RegisterPage(),
-        '/welcome': (context) => WelcomePAge(),
+        '/welcome': (context) => HomePage(),
       },
     );
   }
