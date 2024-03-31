@@ -1,20 +1,30 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
 import 'package:tourism_app/pages/Auth/login.dart';
+import 'package:tourism_app/provider/app_provider.dart';
 import 'package:tourism_app/utils/app_utils.dart';
+import 'package:tourism_app/widgets/buttons/custon_button.dart';
+import 'package:tourism_app/widgets/textFields/custom_textField.dart';
+import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController Namecontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+   
+   
     return Scaffold(
-     
-     
       appBar: AppBar(
-        
-        backgroundColor:AppColor.PrimaryColor,
+        backgroundColor: AppColor.PrimaryColor,
         title: Text(
           'Register Account',
           style: TextStyle(
@@ -24,110 +34,96 @@ class RegisterPage extends StatelessWidget {
           ),
         ),
       ),
-      
-      
-      backgroundColor:Color.fromARGB(179, 241, 236, 236), // Change the background color of the body here
-      
+
+      backgroundColor: Color.fromARGB(
+          179, 241, 236, 236), 
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        
         child: Column(
           children: [
-            SizedBox(height: 70),
             
-            
+            SizedBox(height: 30),
+
             //APP Center logo
             Image.asset(
-              'assets/images/appLogo.png', // Replace this with your app logo asset path
+              'assets/images/appLogo.png',
               width: 100,
               height: 100,
             ),
-            
-            
+
             SizedBox(height: 10),
-           Text(
-              "Welcome Back City Guide",
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-                color: AppColor.PrimaryColor,
-                fontFamily: AppFonts.primaryFont,
-                shadows: [
-                  Shadow(
-                    color: Colors.black.withOpacity(0.7), // Shadow color
-                    offset: Offset(5, 5), // Shadow offset
-                    blurRadius: 8, // Shadow blur radius
+
+            
+            //User Name Fields
+            CustomTextFields(
+              hintText: "Enter Your Name",
+              prefixicon: FluentIcons.person_16_regular,
+              controller: Namecontroller,
+              
+              ),
+
+
+
+
+            SizedBox(height: 30),          
+
+           Form(
+              child: Column(
+                
+                children: [  
+                  
+                  CustomTextFields(
+                    hintText: "Enter Email Address",
+                    prefixicon: FluentIcons.mail_16_regular,
+                    controller: emailcontroller,
                   ),
+
+                  SizedBox(height: 35),
+                  
+                  
+                  
+                    //PAssword Fields
+                 
+                 Consumer<AppNotifier>(
+                  builder:(context ,value,child){
+
+                    return PasswordFields(
+                    
+                    hintText: "Enter Your Password",
+                    prefixicon: FluentIcons.lock_closed_16_filled,
+                    controller: passwordcontroller,
+                    ObscureText: value.obscuretext,
+                    onToggle: value.passwordToggle,
+                  );
+                  },),
+
                 ],
-              ),
-            ),
+              ), 
+            ), 
+
+  
             
-            
-            
-            SizedBox(height: 70),
-            SizedBox(
-              height: 50,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'User Name',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      gotoPage(LoginPage(), context);
+                    },
+                    child: Text(
+                      "Are you already registered?",
+                      style: TextStyle(color: AppColor.PrimaryColor,fontWeight: FontWeight.bold),
+                    )),
+              ],
             ),
 
-            SizedBox(height: 25),
-            SizedBox(
-              height: 50,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email Address',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-
-
-            SizedBox(height: 25),
-            SizedBox(
-              height: 50,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  suffixIcon: Icon(Icons.visibility),
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
-              ),
-            ),
-
-           TextButton(onPressed: (){
-            gotoPage(LoginPage(), context);
-           }, 
            
-           child:  Text("are you already registered?",style: TextStyle(color: Colors.red),),),
-           
-
-
+           //Button here
             SizedBox(height: 25),
-            SizedBox(
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(AppColor.PrimaryColor),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-
-
-                child: Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+            CustomButton(
+              tittle: "Register",
+              onTap: () {},
             ),
 
 
