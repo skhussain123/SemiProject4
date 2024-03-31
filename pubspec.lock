@@ -136,7 +136,19 @@ packages:
       sha256: "5377eaac3b9fe8aaf22638d87f92b62784f23572e132dfc029195e84d6cb37de"
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
     version: "2.12.0"
+=======
+    version: "2.11.5"
+  fluentui_system_icons:
+    dependency: "direct main"
+    description:
+      name: fluentui_system_icons
+      sha256: cb71bafe3d760b0a6c49aabeaa8ae9534968b8a8e2e6d8e32f67090cd9bb53be
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.232"
+>>>>>>> 261f90d63f32bfc77dd1f372b50350f353f4c4e4
   flutter:
     dependency: "direct main"
     description: flutter
@@ -152,6 +164,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
   http_parser:
     dependency: transitive
     description:
@@ -215,7 +235,19 @@ packages:
       sha256: d584fa6707a52763a52446f02cc621b077888fb63b93bbcb1143a7be5a0c0c04
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
     version: "1.11.0"
+=======
+    version: "1.10.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+>>>>>>> 261f90d63f32bfc77dd1f372b50350f353f4c4e4
   path:
     dependency: transitive
     description:
@@ -232,6 +264,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.2"
   sky_engine:
     dependency: transitive
     description: flutter

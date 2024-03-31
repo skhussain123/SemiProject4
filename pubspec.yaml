@@ -39,6 +39,9 @@ dependencies:
   firebase_auth: ^4.17.8
   cloud_firestore: ^4.15.8
   smooth_page_indicator: ^1.1.0
+  font_awesome_flutter: ^10.7.0
+  fluentui_system_icons: ^1.1.232
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
