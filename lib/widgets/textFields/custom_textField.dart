@@ -6,10 +6,13 @@ class CustomTextFields extends StatelessWidget {
   IconData? prefixicon;
   TextEditingController? controller;
 
+  String? Function(String? value)? validator;
+
   CustomTextFields({
      this.hintText,
      this.controller,
      this.prefixicon,
+     this.validator,
   });
 
   @override
@@ -17,6 +20,7 @@ class CustomTextFields extends StatelessWidget {
     return SizedBox(
       height: 50,
       child: TextFormField(
+        validator: validator,
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: Icon(prefixicon),

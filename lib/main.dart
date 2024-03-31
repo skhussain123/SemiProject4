@@ -22,9 +22,7 @@ class MainFile extends StatelessWidget {
       
       child: MaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: "/",
       initialRoute: "/",
-      // home: SplaseScreen(),
 
       routes: {
         // "/": (context) => Onboardingview(),

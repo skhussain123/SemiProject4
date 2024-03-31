@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 
-class PasswordFields extends StatelessWidget {
+class ConfirmPasswordFields extends StatelessWidget {
   
   
   String? hintText;
   IconData? prefixicon;
   TextEditingController? controller;
-  bool ObscureText;
+  bool CObscureText;
   VoidCallback? onToggle;
 
    String? Function(String? value)? validator;
 
   
-  PasswordFields({
+  ConfirmPasswordFields({
     this.hintText,
     this.controller,
     this.prefixicon,
-    this.ObscureText = true,
+    this.CObscureText = true,
     required this.onToggle,
     this.validator,
   });
@@ -33,14 +33,14 @@ class PasswordFields extends StatelessWidget {
 
       //Password input Fields
       child: TextFormField(
-        obscureText: ObscureText,
+        obscureText: CObscureText,
         controller: controller,
         validator: validator,
         decoration: InputDecoration(
           prefixIcon: Icon(prefixicon),
           suffixIcon: IconButton(
             onPressed: onToggle,
-            icon: Icon(ObscureText ? FluentIcons.eye_12_regular : FluentIcons.eye_off_16_regular),
+            icon: Icon(CObscureText ? FluentIcons.eye_12_regular : FluentIcons.eye_off_16_regular),
           ),
           labelText: hintText,
           border: OutlineInputBorder(),
