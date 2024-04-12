@@ -155,6 +155,7 @@ class RegisterPage extends StatelessWidget {
                   ],
                 ),
               ),
+              
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
