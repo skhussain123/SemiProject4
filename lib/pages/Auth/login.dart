@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
+import 'package:tourism_app/firebase/auth/auth_servive.dart';
 import 'package:tourism_app/pages/Auth/register.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 import 'package:tourism_app/utils/app_utils.dart';
@@ -11,8 +12,11 @@ import 'package:tourism_app/widgets/textFields/custom_textField.dart';
 import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class LoginPage extends StatelessWidget {
+
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+
+  AuthService _authService =AuthService();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -118,7 +122,7 @@ class LoginPage extends StatelessWidget {
               tittle: "Login",
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  print("Form State is Valid");
+                  _authService.signin(emailcontroller.text, passwordcontroller.text, context);
                 }
               },
             ),

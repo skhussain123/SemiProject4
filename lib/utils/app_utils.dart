@@ -34,3 +34,13 @@ Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>page,))
 void gotoPageAndRemoveAll(Widget page,BuildContext context){
 Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=>page,),(route)=>false);
 }
+
+
+displayMessage(String message,BuildContext context){
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(message))
+  );
+
+
+}

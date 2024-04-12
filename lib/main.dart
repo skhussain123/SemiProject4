@@ -6,7 +6,15 @@ import 'package:tourism_app/pages/Auth/register.dart';
 import 'package:tourism_app/pages/home.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  
+  
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform);
+  
   runApp(const MainFile());
 }
 
@@ -15,22 +23,17 @@ class MainFile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return ChangeNotifierProvider(
-      create: (context)=>AppNotifier(),
-      
+      create: (context) => AppNotifier(),
       child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-
-      routes: {
-        // "/": (context) => Onboardingview(),
-         "/": (context) => RegisterPage(),
-        '/welcome': (context) => HomePage(),
-      },
-    ),
-    
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/",
+        routes: {
+          // "/": (context) => Onboardingview(),
+          "/": (context) => LoginPage(),
+          '/Home': (context) => HomePage(),
+        },
+      ),
     );
   }
 }

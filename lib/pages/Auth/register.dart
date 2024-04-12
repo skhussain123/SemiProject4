@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
+import 'package:tourism_app/firebase/auth/auth_servive.dart';
 import 'package:tourism_app/pages/Auth/login.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 import 'package:tourism_app/utils/app_utils.dart';
@@ -12,12 +13,13 @@ import 'package:tourism_app/widgets/textFields/custom_textField.dart';
 import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class RegisterPage extends StatelessWidget {
-  TextEditingController Namecontroller = TextEditingController();
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController Confirmpasswordcontroller = TextEditingController();
+  TextEditingController Namecontroller = TextEditingController(text: "Hussain");
+  TextEditingController emailcontroller = TextEditingController(text: "hk0527075@gmail.com");
+  TextEditingController passwordcontroller = TextEditingController(text: "hussain1234");
+  TextEditingController Confirmpasswordcontroller = TextEditingController(text: "hussain1234");
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthService authService = AuthService();
 
   RegisterPage({Key? key}) : super(key: key);
 
@@ -70,13 +72,10 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
 
-              
-
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                   
                     SizedBox(height: 25),
 
                     //User Name Fields
@@ -92,7 +91,7 @@ class RegisterPage extends StatelessWidget {
                     ),
 
                     SizedBox(height: 20),
-                    
+
                     CustomTextFields(
                       hintText: "Enter Email Address",
                       prefixicon: FluentIcons.mail_16_regular,
@@ -117,14 +116,11 @@ class RegisterPage extends StatelessWidget {
                           prefixicon: FluentIcons.lock_closed_16_filled,
                           controller: passwordcontroller,
                           validator: (value) {
-                           
                             if (value!.isEmpty) {
                               return "Phone number is Reqired";
                             } else if (value.length < 6) {
                               return "Password Should be Atleast 6 Character";
                             }
-
-
                           },
                           ObscureText: value.obscuretext,
                           onToggle: value.passwordToggle,
@@ -135,22 +131,23 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(height: 20),
 
                     //Confirm PAssword Fields
+
+                    // Confirm Password Fields
                     Consumer<AppNotifier>(
                       builder: (context, value, child) {
-                        return ConfirmPasswordFields(
-                          hintText: "Enter Your Password",
+                        return PasswordFields(
+                          hintText: "Confirm Your Password",
                           prefixicon: FluentIcons.lock_closed_16_filled,
                           controller: Confirmpasswordcontroller,
                           validator: (value) {
-                           
                             if (value!.isEmpty) {
-                              return "Phone number is Reqired";
-                            } else if (passwordcontroller != value) {
+                              return "Confirm Password is Required";
+                            } else if (passwordcontroller.text !=
+                                Confirmpasswordcontroller.text) {
                               return "Password does not Match";
                             }
                           },
-
-                          CObscureText: value.cobscuretext,
+                          ObscureText: value.cobscuretext,
                           onToggle: value.ConfirlpasswordToggle,
                         );
                       },
@@ -182,6 +179,9 @@ class RegisterPage extends StatelessWidget {
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     print("Form State is valid");
+
+                    authService.signup(Namecontroller.text,
+                        emailcontroller.text, passwordcontroller.text, context);
                   }
                 },
                 isLoading: false,

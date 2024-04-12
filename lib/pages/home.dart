@@ -14,6 +14,10 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
        
 
+       body: Column(children: [
+        Text("Home Page")
+       ]),
+
       ),
     );
   }
