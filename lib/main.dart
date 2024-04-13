@@ -19,7 +19,7 @@ void main() async {
 }
 
 class MainFile extends StatelessWidget {
-  const MainFile({super.key});
+  const MainFile({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,8 @@ class MainFile extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
         routes: {
-          // "/": (context) => Onboardingview(),
-          "/": (context) => LoginPage(),
-          '/Home': (context) => HomePage(),
+          '/': (context) => HomePage(),
+          '/login': (context) => LoginPage(),
         },
       ),
     );
