@@ -11,26 +11,20 @@ void main() {
 }
 
 class MainFile extends StatelessWidget {
-  const MainFile({super.key});
+  const MainFile({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return ChangeNotifierProvider(
-      create: (context)=>AppNotifier(),
-      
+      create: (context) => AppNotifier(),
       child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-
-      routes: {
-        // "/": (context) => Onboardingview(),
-        //  "/": (context) => RegisterPage(),
-        '/': (context) => HomePage(),
-      },
-    ),
-    
+        debugShowCheckedModeBanner: false,
+        initialRoute: "/",
+        routes: {
+          '/': (context) => HomePage(),
+          '/login': (context) => LoginPage(),
+        },
+      ),
     );
   }
 }

@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     HomePageContent(),
     TourGuidePage(),
-    LoginPage(),
+    // LoginPage(),
   ];
 
   @override
@@ -319,13 +319,13 @@ class _TourGuidePageState extends State<TourGuidePage> {
   }
 }
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+// class LoginPage extends StatelessWidget {
+//   const LoginPage({Key? key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Login Page'),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text('Login Page'),
+//     );
+//   }
+// }
