@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
-import 'package:tourism_app/firebase/auth/auth_servive.dart';
+import 'package:tourism_app/firebase/auth/auth_service.dart';
 import 'package:tourism_app/pages/Auth/register.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 import 'package:tourism_app/utils/app_utils.dart';
