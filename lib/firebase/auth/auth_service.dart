@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tourism_app/pages/Auth/login.dart';
 import 'package:tourism_app/pages/home.dart';
 import 'package:tourism_app/utils/app_utils.dart';
-import 'package:tourism_app/widgets/buttons/Alert.dart';
+import 'package:tourism_app/widgets/Alert/Alert.dart';
 
 class AuthService {
 
@@ -106,4 +107,16 @@ class AuthService {
       );
     }
   }
+
+
+
+//User Signout Account Function Code here
+Future signout(BuildContext context)async{
+
+  _auth.signOut().then((value){gotoPageAndRemoveAll(LoginPage(), context);});
+}
+
+
+
+
 }

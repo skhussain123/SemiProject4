@@ -13,8 +13,8 @@ import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class LoginPage extends StatelessWidget {
 
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController(text: "hk0527075@gmail.com");
+  TextEditingController passwordcontroller = TextEditingController(text: "hussain1234");
 
   AuthService _authService =AuthService();
 

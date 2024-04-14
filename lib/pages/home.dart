@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:tourism_app/constants/color.dart';
+import 'package:tourism_app/firebase/auth/auth_service.dart';
+import 'package:tourism_app/pages/Auth/login.dart';
+import 'package:tourism_app/widgets/header/Drawer.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+   HomePage({Key? key}) : super(key: key);
+
+    AuthService _authService =AuthService();
+    bool _showSuccessAlert = false;
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
+  
   int _selectedIndex = 0;
 
   final List<Widget> _pages = <Widget>[
@@ -17,36 +26,62 @@ class _HomePageState extends State<HomePage> {
     // LoginPage(),
   ];
 
+  
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 4, 1, 171),
-        title: Text('City Guide',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-              // bottom: Radius.circular(5), // Adjust the radius as needed
-              ),
+      drawer: HeaderDrawer(),
+      
+    
+  appBar: AppBar(
+  iconTheme: IconThemeData(
+    color: Colors.white,
+  ),
+  backgroundColor: AppColor.PrimaryColor,
+  title: GestureDetector(
+    onTap: () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    },
+    child: Text(
+      'City Guide',
+      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
+    ),
+  ),
+  
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(),
+  ),
+
+  actions: [
+    PopupMenuButton(
+      icon: Icon(Icons.more_vert, color: Colors.white),
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+          child: Text("Item 1"),
+          value: 1,
         ),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(right: 10.0),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.alarm_outlined,
-                color: Color.fromARGB(255, 223, 216, 17),
-              ),
-              onPressed: () {
-                // Add your onPressed logic here
-              },
-            ),
-          ),
-        ],
-      ),
+        PopupMenuItem(
+          child: Text("Item 2"),
+          value: 2,
+        ),
+        PopupMenuItem(
+          child: Text("Logout"),
+          value: 3,
+        ),
+      ],
+      onSelected: (value) {
+        if (value == 3) {
+        }
+      },
+    ),
+  ],
+),
+      
       body: _pages[_selectedIndex],
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
       bottomNavigationBar: BottomNavigationBar(
