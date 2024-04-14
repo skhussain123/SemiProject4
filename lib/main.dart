@@ -29,7 +29,7 @@ class MainFile extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
         routes: {
-          '/': (context) => HomePage(),
+          '/': (context) => Onboardingview(),
           '/login': (context) => LoginPage(),
         },
       ),
