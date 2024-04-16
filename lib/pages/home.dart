@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
             ),
             child: IconButton(
               icon: Icon(
-                Icons.alarm_outlined,
-                color: Color.fromARGB(255, 223, 216, 17),
+                Icons.notifications_active_outlined,
+                color: Colors.white,
               ),
               onPressed: () {
                 // Add your onPressed logic here
@@ -246,14 +246,14 @@ class HomePageContent extends StatelessWidget {
             padding: EdgeInsets.all(12),
             child: Icon(
               icon,
-              size: 48,
+              size: 35,
               color: Color.fromARGB(71, 255, 4, 4),
             ),
           ),
         ),
         Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.w200),
         ),
       ],
     );
@@ -284,8 +284,9 @@ class _TourGuidePageState extends State<TourGuidePage> {
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(10),
-              border:
-                  Border.all(color: const Color.fromARGB(255, 255, 254, 254)),
+              border: Border.all(
+                color: const Color.fromARGB(255, 255, 254, 254),
+              ),
             ),
             child: DropdownButton<String>(
               hint: Text('Select City'),
@@ -312,6 +313,68 @@ class _TourGuidePageState extends State<TourGuidePage> {
                 'Selected City: $_selectedCity',
                 style: TextStyle(fontSize: 20),
               ),
+            ),
+          // Add Row with two columns for hotels and beaches
+          if (_selectedCity != null)
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Hotels',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      // Add hotel images
+                      Image.asset(
+                        'assets/images/lahore.png',
+                        height: 100,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 10),
+                      Image.asset(
+                        'assets/images/karachi.png',
+                        height: 100,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Beaches',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      // Add beach images
+                      Image.asset(
+                        'assets/images/faisalMasjid.png',
+                        height: 100,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 10),
+                      Image.asset(
+                        'assets/images/islamabad.png',
+                        height: 100,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
         ],
       ),

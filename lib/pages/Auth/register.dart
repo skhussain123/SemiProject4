@@ -8,7 +8,7 @@ import 'package:tourism_app/pages/Auth/login.dart';
 import 'package:tourism_app/provider/app_provider.dart';
 import 'package:tourism_app/utils/app_utils.dart';
 import 'package:tourism_app/widgets/buttons/custon_button.dart';
-import 'package:tourism_app/widgets/textFields/confirmPassword.dart';
+// import 'package:tourism_app/widgets/textFields/confirmPassword.dart';
 import 'package:tourism_app/widgets/textFields/custom_textField.dart';
 import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
