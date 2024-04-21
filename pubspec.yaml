@@ -37,11 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.8
-  cloud_firestore: ^4.15.8
+  cloud_firestore: ^4.17.0
   smooth_page_indicator: ^1.1.0
   font_awesome_flutter: ^10.7.0
   fluentui_system_icons: ^1.1.232
   provider: ^6.1.2
+  swiper_detector: ^0.0.1
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

@@ -6,12 +6,9 @@ import 'package:tourism_app/utils/app_utils.dart';
 import 'package:tourism_app/widgets/buttons/Alert.dart';
 
 class AuthService {
-
-
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _db = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
 
 //User Register Account Account Function Code here
   Future signup(String firstname, email, password, BuildContext context) async {
@@ -40,13 +37,11 @@ class AuthService {
             onTap: () {
               Navigator.of(context).pop();
             },
-            description:
-                'Account successfully Created',
+            description: 'Account successfully Created',
           );
         },
       );
     } catch (error) {
-
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -61,7 +56,6 @@ class AuthService {
       );
     }
   }
-
 
 //User Login Account Function Code here
   Future signin(String email, password, BuildContext context) async {
@@ -90,7 +84,6 @@ class AuthService {
       );
 
       gotoPageAndRemoveAll(HomePage(), context);
-      
     } on FirebaseAuthException catch (e) {
       showDialog(
         context: context,

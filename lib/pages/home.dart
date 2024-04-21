@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tourism_app/pages/beaches.dart';
+import 'package:tourism_app/pages/hotels.dart';
+import 'package:tourism_app/pages/popularsites.dart';
+import 'package:tourism_app/pages/userprofile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,20 +19,17 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = <Widget>[
     HomePageContent(),
     TourGuidePage(),
-    // LoginPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 4, 1, 171),
+        backgroundColor: Color.fromARGB(255, 60, 60, 68),
         title: Text('City Guide',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w100)),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-              // bottom: Radius.circular(5), // Adjust the radius as needed
-              ),
+          borderRadius: BorderRadius.vertical(),
         ),
         actions: [
           Container(
@@ -37,11 +39,16 @@ class _HomePageState extends State<HomePage> {
             ),
             child: IconButton(
               icon: Icon(
-                Icons.notifications_active_outlined,
+                Icons.person_2_outlined,
                 color: Colors.white,
               ),
               onPressed: () {
-                // Add your onPressed logic here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserProfilePage(),
+                  ),
+                );
               },
             ),
           ),
@@ -59,10 +66,6 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.tour),
             label: 'Tour Guide',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.login),
-            label: 'Login',
-          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -78,14 +81,39 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomePageContent extends StatelessWidget {
-  final String? title;
-  final String? imageUrl;
-
-  const HomePageContent({Key? key, this.title, this.imageUrl})
-      : super(key: key);
+  const HomePageContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Widget buildCategoryColumn(IconData icon, String title, Function() onTap) {
+      return InkWell(
+        onTap: onTap,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                padding: EdgeInsets.all(12),
+                child: Icon(
+                  icon,
+                  size: 35,
+                  color: Color.fromARGB(71, 255, 4, 4),
+                ),
+              ),
+            ),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.w200),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 220, 219, 215),
       body: SingleChildScrollView(
@@ -93,23 +121,42 @@ class HomePageContent extends StatelessWidget {
           children: [
             SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.all(7),
+              padding: const EdgeInsets.all(0),
               child: Container(
-                height:
-                    150, // Adjust the height of the image container as needed
+                height: 150,
                 width: double.infinity,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.circular(20),
                   child: Opacity(
                     opacity: 0.8,
-                    child: Image.asset(
-                      'assets/images/faisalMasjid.png',
-                      fit: BoxFit.cover,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        aspectRatio: 10 / 10,
+                        viewportFraction: 1.0,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 2),
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: false,
+                      ),
+                      items: [
+                        'assets/images/faisalMasjid.png',
+                        'assets/images/karachi.png',
+                        'assets/images/islamabad.png',
+                        'assets/images/lahore.png',
+                        'assets/images/faisalMasjid.png',
+                        'assets/images/karachi.png',
+                        'assets/images/islamabad.png',
+                      ].map((item) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Image.asset(
+                              item,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
@@ -157,10 +204,42 @@ class HomePageContent extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  buildCategoryColumn(Icons.location_city, 'Popular Sites'),
-                  buildCategoryColumn(Icons.hotel, 'Hotels'),
-                  buildCategoryColumn(Icons.beach_access, 'Beaches'),
-                  buildCategoryColumn(Icons.landscape, 'Heritage Places'),
+                  buildCategoryColumn(
+                    Icons.hotel,
+                    'Hotels',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HotelsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  buildCategoryColumn(
+                    Icons.beach_access,
+                    'Beaches',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BeachesPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  buildCategoryColumn(
+                    Icons.map,
+                    'Popular Sites',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PopularSitesPage(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -172,26 +251,20 @@ class HomePageContent extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              15), // Add border radius here
-                          child: Image.asset(
-                            'assets/images/islamabad.png',
-                            height: 100,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                        Citycard(),
+                        SizedBox(height: 12),
+                        Text(
+                          'Faisal Masjid',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 10),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              15), // Add border radius here
-                          child: Image.asset(
-                            'assets/images/karachi.png',
-                            height: 100,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                        CityCard(),
+                        SizedBox(height: 10),
+                        Text(
+                          'Mazar e Quaid',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -201,8 +274,7 @@ class HomePageContent extends StatelessWidget {
                     child: Column(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              15), // Add border radius here
+                          borderRadius: BorderRadius.circular(15),
                           child: Image.asset(
                             'assets/images/lahore.png',
                             height: 100,
@@ -211,15 +283,26 @@ class HomePageContent extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 10),
+                        Text(
+                          'Lahore',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              15), // Add border radius here
+                          borderRadius: BorderRadius.circular(15),
                           child: Image.asset(
                             'assets/images/faisalMasjid.png',
                             height: 100,
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Faisal Masjid',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -260,15 +343,61 @@ class HomePageContent extends StatelessWidget {
   }
 }
 
+class CityCard extends StatelessWidget {
+  const CityCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Image.asset(
+        'assets/images/karachi.png',
+        height: 100,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+class Citycard extends StatelessWidget {
+  const Citycard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Image.asset(
+        'assets/images/islamabad.png',
+        height: 100,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
 class TourGuidePage extends StatefulWidget {
-  const TourGuidePage({Key? key});
+  const TourGuidePage({Key? key}) : super(key: key);
 
   @override
   _TourGuidePageState createState() => _TourGuidePageState();
 }
 
-class _TourGuidePageState extends State<TourGuidePage> {
+class _TourGuidePageState extends State<TourGuidePage>
+    with SingleTickerProviderStateMixin {
   String? _selectedCity;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -314,81 +443,195 @@ class _TourGuidePageState extends State<TourGuidePage> {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-          // Add Row with two columns for hotels and beaches
+          // Add TabBar and TabBarView for hotels and attractions
           if (_selectedCity != null)
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hotels',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+            Expanded(
+              child: DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: [
+                    TabBar(
+                      controller: _tabController,
+                      tabs: [
+                        Tab(text: 'Hotels'),
+                        Tab(text: 'Attractions'),
+                      ],
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: [
+                          // Hotels Tab
+                          _selectedCity == 'Karachi'
+                              ? StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('cities')
+                                      .doc('FfpJ60KyfFIpAHTGvP59')
+                                      .collection('hotels')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                        child: Text('Error: ${snapshot.error}'),
+                                      );
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    if (snapshot.data!.docs.isEmpty) {
+                                      return Center(
+                                        child: Text(
+                                            'No hotels found for $_selectedCity'),
+                                      );
+                                    }
+                                    return SingleChildScrollView(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(14),
+                                        child: Column(
+                                          children: snapshot.data!.docs.map(
+                                            (doc) {
+                                              return Column(
+                                                children: [
+                                                  Text(
+                                                    doc['name'],
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  // Add hotel images
+                                                  Image.network(
+                                                    doc['image'],
+                                                    height: 100,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Text('Ratings'),
+                                                      Text(doc['rating']),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Text('Opening hours'),
+                                                      Text(
+                                                        doc['opening-hours'],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ).toList(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Center(
+                                  child: Text(
+                                      'No data available for $_selectedCity'),
+                                ),
+                          // Attractions Tab
+                          _selectedCity == 'Karachi'
+                              ? StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('cities')
+                                      .doc('FfpJ60KyfFIpAHTGvP59')
+                                      .collection('attractions')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                        child: Text('Error: ${snapshot.error}'),
+                                      );
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    if (snapshot.data!.docs.isEmpty) {
+                                      return Center(
+                                        child: Text(
+                                            'No attractions found for $_selectedCity'),
+                                      );
+                                    }
+                                    return SingleChildScrollView(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(14),
+                                        child: Column(
+                                          children: snapshot.data!.docs.map(
+                                            (doc) {
+                                              return Column(
+                                                children: [
+                                                  Text(
+                                                    doc['name'],
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  // Add attraction images
+                                                  Image.network(
+                                                    doc['image'],
+                                                    height: 100,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  ),
+
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        'Rating',
+                                                      ),
+                                                      Text(
+                                                        doc['rating'],
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  Column(
+                                                    children: [
+                                                      Text(
+                                                        'Opening hours',
+                                                      ),
+                                                      Text(
+                                                        doc['opening-hours'],
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              );
+                                            },
+                                          ).toList(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Center(
+                                  child: Text(
+                                      'No data available for $_selectedCity'),
+                                ),
+                        ],
                       ),
-                      SizedBox(height: 10),
-                      // Add hotel images
-                      Image.asset(
-                        'assets/images/lahore.png',
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 10),
-                      Image.asset(
-                        'assets/images/karachi.png',
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Beaches',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      // Add beach images
-                      Image.asset(
-                        'assets/images/faisalMasjid.png',
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 10),
-                      Image.asset(
-                        'assets/images/islamabad.png',
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
         ],
       ),
     );
   }
 }
-
-// class LoginPage extends StatelessWidget {
-//   const LoginPage({Key? key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Text('Login Page'),
-//     );
-//   }
-// }

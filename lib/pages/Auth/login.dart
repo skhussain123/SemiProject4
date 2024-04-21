@@ -12,11 +12,10 @@ import 'package:tourism_app/widgets/textFields/custom_textField.dart';
 import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class LoginPage extends StatelessWidget {
-
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
 
-  AuthService _authService =AuthService();
+  AuthService _authService = AuthService();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -122,7 +121,8 @@ class LoginPage extends StatelessWidget {
               tittle: "Login",
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  _authService.signin(emailcontroller.text, passwordcontroller.text, context);
+                  _authService.signin(
+                      emailcontroller.text, passwordcontroller.text, context);
                 }
               },
             ),
