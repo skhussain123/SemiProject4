@@ -28,7 +28,7 @@ class MainFile extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: "/",
         routes: {
-          '/': (context) => HomePage(),
+          '/': (context) => LoginPage(),
           // '/login': (context) => LoginPage(),
         },
       ),
