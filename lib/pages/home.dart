@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tourism_app/pages/beaches.dart';
 import 'package:tourism_app/pages/hotels.dart';
 import 'package:tourism_app/pages/popularsites.dart';
@@ -439,7 +441,7 @@ class _TourGuidePageState extends State<TourGuidePage>
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                'Selected City: $_selectedCity',
+                'Results for : $_selectedCity',
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -498,7 +500,7 @@ class _TourGuidePageState extends State<TourGuidePage>
                                                   Text(
                                                     doc['name'],
                                                     style: TextStyle(
-                                                      fontSize: 18,
+                                                      fontSize: 21,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),
@@ -511,19 +513,108 @@ class _TourGuidePageState extends State<TourGuidePage>
                                                     width: double.infinity,
                                                     fit: BoxFit.cover,
                                                   ),
-                                                  Column(
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Text('Ratings'),
-                                                      Text(doc['rating']),
+                                                      Text('Ratings: '),
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color
+                                                              .fromARGB(255,
+                                                              140, 180, 250),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Text(
+                                                          doc['rating'],
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
-                                                  Column(
+
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Text('Opening hours'),
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color
+                                                              .fromARGB(255,
+                                                              250, 140, 140),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Text(
+                                                          'Opening hours:',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                          width:
+                                                              10), // Add space between text and value
                                                       Text(
                                                         doc['opening-hours'],
                                                       ),
                                                     ],
+                                                  ),
+
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        'Description:',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width, // Adjust width as needed
+                                                        child: Text(
+                                                          doc['description'],
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines:
+                                                              2, // Adjust maxLines as needed
+                                                          style: TextStyle(
+                                                              // Add your preferred style here
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
                                                 ],
                                               );
@@ -589,10 +680,13 @@ class _TourGuidePageState extends State<TourGuidePage>
                                                     fit: BoxFit.cover,
                                                   ),
 
-                                                  Column(
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
-                                                        'Rating',
+                                                        'Rating: ',
                                                       ),
                                                       Text(
                                                         doc['rating'],
@@ -603,7 +697,7 @@ class _TourGuidePageState extends State<TourGuidePage>
                                                   Column(
                                                     children: [
                                                       Text(
-                                                        'Opening hours',
+                                                        'Opening hours: ',
                                                       ),
                                                       Text(
                                                         doc['opening-hours'],

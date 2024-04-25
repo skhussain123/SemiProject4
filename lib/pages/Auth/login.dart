@@ -1,6 +1,6 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tourism_app/admin_dashboard/admin.dart';
 import 'package:tourism_app/constants/Fonts.dart';
 import 'package:tourism_app/constants/color.dart';
 import 'package:tourism_app/firebase/auth/auth_service.dart';
@@ -12,8 +12,12 @@ import 'package:tourism_app/widgets/textFields/custom_textField.dart';
 import 'package:tourism_app/widgets/textFields/passwordFields.dart';
 
 class LoginPage extends StatelessWidget {
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // Define local admin credentials
+  final String adminEmail = 'admin@cityguide.com';
+  final String adminPassword = 'admin123';
 
   AuthService _authService = AuthService();
 
@@ -77,8 +81,7 @@ class LoginPage extends StatelessWidget {
 
                   CustomTextFields(
                     hintText: "Enter Email Address",
-                    prefixicon: FluentIcons.mail_16_regular,
-                    controller: emailcontroller,
+                    controller: emailController,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Name is Required";
@@ -97,8 +100,7 @@ class LoginPage extends StatelessWidget {
                     builder: (context, value, child) {
                       return PasswordFields(
                           hintText: "Enter Your Password",
-                          prefixicon: FluentIcons.lock_closed_16_filled,
-                          controller: passwordcontroller,
+                          controller: passwordController,
                           ObscureText: value.obscuretext,
                           onToggle: value.passwordToggle,
                           validator: (value) {
@@ -118,13 +120,21 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: getScreenHeight(context) * 0.05),
 
             CustomButton(
-              tittle: "Login",
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  _authService.signin(
-                      emailcontroller.text, passwordcontroller.text, context);
+                  // Check if admin credentials
+                  if (emailController.text == adminEmail &&
+                      passwordController.text == adminPassword) {
+                    // Navigate to admin page
+                    gotoPage(AdminDashboard(), context);
+                  } else {
+                    // Proceed with regular user login
+                    _authService.signin(
+                        emailController.text, passwordController.text, context);
+                  }
                 }
               },
+              tittle: 'Login',
             ),
 
             Row(
